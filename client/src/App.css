@@ -1,0 +1,7 @@
+.bg-image-overlay {
+    background-image: url('./assets/banner.jpg');
+    background-color: #000;
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+}
