@@ -5,12 +5,12 @@ import Footer from './Footer'
 
 const Layout = () => {
     return (
-        <div className='main-layout p-3 h-screen w-full'>
-            <div className='bg-[url(./assets/demo01-slide-001.jpg)] h-full rounded-2xl overflow-hidden'>
+        <div className='main-layout min-h-screen w-full'>
+            <div className='bg-[url(./assets/demo01-slide-001.jpg)] h-full rounded-b-2xl overflow-hidden'>
                 <Navbar />
-                <Outlet />
-                <Footer />
             </div>
+            <Outlet />
+            <Footer />
         </div>
     )
 }

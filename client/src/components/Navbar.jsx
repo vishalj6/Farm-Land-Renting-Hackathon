@@ -18,9 +18,9 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex space-x-6">
                     <Link to="/" className="hover:text-amber-400">Home</Link>
-                    <Link to="/about" className="hover:text-amber-400">About</Link>
-                    <Link to="/services" className="hover:text-amber-400">Services</Link>
-                    <Link to="/contact" className="hover:text-amber-400">Contact</Link>
+                    <Link to="/farm-details" className="hover:text-amber-400">Details</Link>
+                    <Link to="/signup" className="hover:text-amber-400">SignUp</Link>
+                    <Link to="/login" className="hover:text-amber-400">Login</Link>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -37,9 +37,9 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} bg-[#0000004f] text-white`}>
                 <Link to="/" className="block px-4 py-2 hover:bg-gray-700">Home</Link>
-                <Link to="/about" className="block px-4 py-2 hover:bg-gray-700">About</Link>
-                <Link to="/services" className="block px-4 py-2 hover:bg-gray-700">Services</Link>
-                <Link to="/contact" className="block px-4 py-2 hover:bg-gray-700">Contact</Link>
+                <Link to="/farm-details" className="block px-4 py-2 hover:bg-gray-700">Details</Link>
+                <Link to="/signup" className="block px-4 py-2 hover:bg-gray-700">SignUp</Link>
+                <Link to="/login" className="block px-4 py-2 hover:bg-gray-700">Login</Link>
             </div>
         </nav>
     );

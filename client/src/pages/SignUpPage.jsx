@@ -14,6 +14,7 @@ const SignUpPage = () => {
     lastName: '',
     email: '',
     phoneNo: '',
+    password: '',
     profilePic: null
   });
 
@@ -22,7 +23,6 @@ const SignUpPage = () => {
       navigate('/');
     }
   }, [token, navigate]);
-
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -58,29 +58,31 @@ const SignUpPage = () => {
         <div className="bg-[#0000004f] shadow-md rounded-lg p-8 backdrop-blur-[3px] border-[1px] border-slate-700">
           <h3 className="text-2xl font-semibold text-white text-center mb-6">Sign Up</h3>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-300 text-sm font-bold mb-2">First Name</label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 border border-gray-600  bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                placeholder="Enter your first name"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-300 text-sm font-bold mb-2">Last Name</label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                placeholder="Enter your last name"
-                required
-              />
+            <div className="flex space-x-4 mb-4">
+              <div className="w-1/2">
+                <label className="block text-gray-300 text-sm font-bold mb-2">First Name</label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                  required
+                />
+              </div>
+              <div className="w-1/2">
+                <label className="block text-gray-300 text-sm font-bold mb-2">Last Name</label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Enter your last name"
+                  required
+                />
+              </div>
             </div>
             <div className="mb-4">
               <label className="block text-gray-300 text-sm font-bold mb-2">Email</label>
@@ -103,6 +105,18 @@ const SignUpPage = () => {
                 value={formData.phoneNo}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-300 text-sm font-bold mb-2">Password</label>
+              <input
+                type="password"
+                className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
                 required
               />
             </div>

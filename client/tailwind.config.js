@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'amazon-ember': ['Amazon Ember', 'sans-serif'],
+        'signika': ["Signika", 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
