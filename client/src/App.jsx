@@ -9,6 +9,7 @@ import Layout from './components/Layout'
 import { BeatLoader } from 'react-spinners'
 import FarmDetailsPage from './pages/FarmDetailsPage'
 import BuyerPage from './pages/BuyerPage'
+import ItemDetail from './components/ItemDetail'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route index element={<ProtectedRoutes><HomePage /></ProtectedRoutes>} />
           <Route path="/" element={<Layout />}>
             <Route path="/user" element={<ProtectedRoutes><UserPage /></ProtectedRoutes>} />
+            <Route path="/item/:id" element={<ItemDetail />} />
             <Route path="/buyer-page" element={<ProtectedRoutes><BuyerPage /></ProtectedRoutes>} />
             <Route path="/farm-details" element={<ProtectedRoutes><FarmDetailsPage /></ProtectedRoutes>} />
           </Route>
