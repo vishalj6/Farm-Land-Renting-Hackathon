@@ -7,9 +7,9 @@ const LandSchema = new mongoose.Schema({
         required: true
     },
     location: {
-        address: String,
-        latitude: Number,
-        longitude: Number
+        address: { type: String, required: true },
+        latitude: { type: Number },
+        longitude: { type: Number }
     },
     soilType: {
         type: String,

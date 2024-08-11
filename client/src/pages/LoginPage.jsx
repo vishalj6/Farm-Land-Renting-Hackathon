@@ -56,8 +56,7 @@ const LoginPage = () => {
         if (!validate()) return;
 
         try {
-            const response = await axios.post('/users/login', formData);
-            dispatch(loginUser(response.data));
+            dispatch(loginUser(formData));
             toast.success('Login successful!');
             setTimeout(() => {
                 navigate('/');

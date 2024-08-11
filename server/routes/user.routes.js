@@ -1,13 +1,10 @@
 import express from 'express';
-import { signUpUser, loginUser } from '../controllers/auth.controller.js';
 import { getUser, updateUser } from '../controllers/user.controller.js';
 
 const userRoute = express.Router();
 
-// User Sign-Up Route
-userRoute.get('/user/:userId', getUser);
+userRoute.get('/:userId', getUser);
 
-// User Login Route
-userRoute.put('/user', updateUser);
+userRoute.put('/update/:userId', updateUser);
 
 export default userRoute;

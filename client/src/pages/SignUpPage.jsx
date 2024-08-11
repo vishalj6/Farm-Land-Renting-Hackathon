@@ -42,7 +42,11 @@ const SignUpPage = () => {
     });
 
     try {
-      const response = dispatch(registerUser(formDataToSend));
+      console.log(formData);
+
+      const response = dispatch(registerUser(formData)).unwrap();
+      console.log(response);
+
       toast.success('Registration successful!');
       setTimeout(() => {
         navigate('/login');
@@ -104,6 +108,8 @@ const SignUpPage = () => {
                 name="phoneNo"
                 value={formData.phoneNo}
                 onChange={handleChange}
+                maxLength={10}
+                minLength={10}
                 placeholder="Enter your phone number"
                 required
               />
@@ -127,7 +133,6 @@ const SignUpPage = () => {
                 className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none"
                 name="profilePic"
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="flex items-center justify-between">

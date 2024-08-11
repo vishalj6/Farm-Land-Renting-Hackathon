@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
-  mobile: {
+  phoneNo: {
     type: String,
     required: true,
     unique: true,
@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
   profileImage: {
     type: String,
     default: '', // You can also add a default image URL if needed
+  },
+  password: {
+    type: String,
+    required: true,
   },
 }, {
   timestamps: true, // Adds createdAt and updatedAt fields automatically

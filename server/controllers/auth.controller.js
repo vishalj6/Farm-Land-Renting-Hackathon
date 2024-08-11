@@ -2,49 +2,50 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/user.model.js';
 
-
 // User Signup Controller
 export const signUpUser = async (req, res) => {
-    const { firstName, lastName, email, mobile, password, profileImage } = req.body;
+    const { firstName, lastName, email, phoneNo, profileImage, password } = req.body;
 
     try {
         // Check if the user already exists
-        let user = await UserModel.findOne({ email });
-        if (user) {
+        let existingUser = await UserModel.findOne({ email });
+        if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
+        // Hash the password before saving
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create a new user instance
-        user = new UserModel({
+        let newUser = new UserModel({
             firstName,
             lastName,
             email,
-            mobile,
+            phoneNo,
             profileImage,
-            password,
+            password: hashedPassword,
         });
 
-        
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
+        await newUser.save();
 
-        
-        await user.save();
-
-        
+        // Create JWT payload
         const payload = {
             user: {
-                id: user._id,
+                id: newUser._id,
             },
         };
-        const {password, ...userData} = user._doc;
+
+        // Exclude password from user data
+        const { password: _, ...userData } = newUser._doc;
+
+        // Sign the JWT token
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: '8h' }, 
+            { expiresIn: '8h' },
             (err, token) => {
                 if (err) throw err;
-                res.status(201).json({ token ,user:userData});
+                res.status(201).json({ token, user: userData });
             }
         );
     } catch (error) {
@@ -53,12 +54,13 @@ export const signUpUser = async (req, res) => {
     }
 };
 
+// User Login Controller
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         // Check if the user exists
-        let user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
@@ -69,21 +71,21 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // Payload for JWT
+        // Create JWT payload
         const payload = {
             user: {
                 id: user._id,
             },
         };
 
-        // Exclude password from user data in response
+        // Exclude password from user data
         const { password: _, ...userData } = user._doc;
 
-        // Generate and return JWT token
+        // Sign the JWT token
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: '8h' }, 
+            { expiresIn: '8h' },
             (err, token) => {
                 if (err) throw err;
                 res.status(200).json({ token, user: userData });

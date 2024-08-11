@@ -46,7 +46,7 @@ export const addLand = async (req, res) => {
     }
 };
 
-
+// Update Land Controller
 export const updateLand = async (req, res) => {
     const { landId } = req.params;
     const updateData = req.body;
@@ -69,6 +69,7 @@ export const updateLand = async (req, res) => {
     }
 };
 
+// Get Land Controller
 export const getLand = async (req, res) => {
     const { landId } = req.params;
 
@@ -87,6 +88,7 @@ export const getLand = async (req, res) => {
     }
 };
 
+// List Lands Controller
 export const listLands = async (req, res) => {
     const { soilType, waterAvailability, minSize, maxSize, location } = req.query;
 

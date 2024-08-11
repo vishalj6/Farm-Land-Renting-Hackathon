@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
+const API_BASE_URL = `http://localhost:8000/api/v1` || 'http://localhost:5000/api/v1';
 
 const apiClient = axios.create({
     baseURL: API_BASE_URL,
@@ -9,7 +9,7 @@ const apiClient = axios.create({
 
 export const loginUserApi = async (formData) => {
     try {
-        const response = await apiClient.post('/users/login', formData);
+        const response = await apiClient.post('/auth/login', formData);
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -19,7 +19,7 @@ export const loginUserApi = async (formData) => {
 // Function to register a new user
 export const registerUserApi = async (formData) => {
     try {
-        const response = await apiClient.post('/users/register', formData);
+        const response = await apiClient.post('/auth/signup', formData);
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -35,6 +35,38 @@ export const fetchUserDataApi = async (token) => {
             },
         });
         return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+
+// Function to fetch lands
+export const fetchLandsApi = async () => {
+    try {
+        const response = await apiClient.get('/lands');
+        return response.data; // Adjust according to your API response structure
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+// Function to add a new land
+export const addLandApi = async (landData) => {
+    try {
+        const response = await apiClient.post('/lands', landData);
+        console.log(response);
+        return response.data; // Adjust according to your API response structure
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+// Function to update land data
+export const updateLandApi = async (id, data) => {
+    try {
+        const response = await apiClient.put(`/lands/${id}`, data);
+        return response.data; // Adjust according to your API response structure
     } catch (error) {
         throw error.response.data;
     }

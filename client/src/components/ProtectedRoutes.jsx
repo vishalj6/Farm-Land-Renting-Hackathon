@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const ProtectedRoutes = ({ children }) => {
-    // if (!localStorage.getItem('token')) {
-    //     return <div>Invalid Token</div>
-    //     // return <Navigate to="/login" />
-    // }
+    const { token } = useSelector((state) => state.auth);
+
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
+
     return children;
 }
 
-export default ProtectedRoutes
+export default ProtectedRoutes;

@@ -20,9 +20,9 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (formDat
 });
 
 const initialState = {
-    token: JSON.parse(localStorage.getItem('token')) || null,
-    user: JSON.parse(localStorage.getItem('user')) || null,
-    loading: true,
+    token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+    loading: false,
     error: null,
 };
 
@@ -34,6 +34,8 @@ const authSlice = createSlice({
             state.token = null;
             state.user = null;
             state.loading = false;
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
         }
     },
     extraReducers: (builder) => {
@@ -46,6 +48,9 @@ const authSlice = createSlice({
                 state.token = action.payload.token;
                 state.user = action.payload.user;
                 state.loading = false;
+                // Save to localStorage
+                localStorage.setItem('token', JSON.stringify(action.payload.token));
+                localStorage.setItem('user', JSON.stringify(action.payload.user));
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = false;
@@ -59,6 +64,8 @@ const authSlice = createSlice({
                 state.token = action.payload.token;
                 state.user = action.payload.user;
                 state.loading = false;
+                localStorage.setItem('token', JSON.stringify(action.payload.token));
+                localStorage.setItem('user', JSON.stringify(action.payload.user));
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.loading = false;

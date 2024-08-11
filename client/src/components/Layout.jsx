@@ -5,11 +5,13 @@ import Footer from './Footer'
 
 const Layout = () => {
     return (
-        <div className='main-layout min-h-screen w-full'>
-            <div className='bg-[url(./assets/demo01-slide-001.jpg)] h-full rounded-b-2xl overflow-hidden'>
+        <div className='main-layout min-h-screen w-full overflow-auto'>
+            <div className='fixed w-full z-50'>
                 <Navbar />
             </div>
-            <Outlet />
+            <div className="pt-[50px]">
+                <Outlet />
+            </div>
             <Footer />
         </div>
     )
